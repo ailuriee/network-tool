@@ -77,16 +77,12 @@ function serializeType(type){
 
 //hehe
 function functionFunction(IE, LC, NS, FT) {
-    console.log('functionFunction');
-    console.log(IE, LC, NS, FT);
-    console.log((LC ? (NS ? 'N' : 'S') : (FT ? 'F' : 'T')) + (IE ? 'i' : 'e'));
     return (LC ? (NS ? 'N' : 'S') : (FT ? 'F' : 'T')) + (IE ? 'i' : 'e');
 }
 
 //not working for INTJ / ENTP / ESFJ / ISFP
 function getCogStack(IE, LC, NS, FT) {
     const newStack = new CogStack();
-    console.log('f: ' + FT); //feeling typing not correct
     newStack.dom = functionFunction(IE, LC, NS, FT);
     newStack.auth = functionFunction(!IE, !LC, !NS, !FT);
     newStack.aux = functionFunction(IE, !LC, NS, FT);

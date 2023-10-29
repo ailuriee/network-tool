@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPT Networks Visual Aide</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="grid-container">
+      <div class="tert network"></div>
+      <div class="aux network"></div>
+      <div class="dom network"></div>
+      <div class="type dom-1"></div>
+      <div class="type dom-2"></div>
+      <div class="type dom-3"></div>
+      <div class="type dom-4"></div>
+      <div class="type aux-1"></div>
+      <div class="type aux-2"></div>
+      <div class="type aux-3"></div>
+      <div class="type aux-4"></div>
+      <div class="type tert-1"></div>
+      <div class="type tert-2"></div>
+      <div class="type tert-3"></div>
+      <div class="type tert-4"></div>
+      <div class="type inf-1"></div>
+      <div class="type inf-2"></div>
+      <div class="type inf-3"></div>
+      <div class="type inf-4"></div>
+      <div class="type-form">
+        <form onsubmit="handleSubmit(document.getElementById('type').value.toUpperCase()); return false;">
+          <label for="type"> Type:</label>
+          <input type="text" id="type" name="type">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

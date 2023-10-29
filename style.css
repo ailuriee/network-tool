@@ -51,20 +51,21 @@ body {
 }
 
 .type-code {
+    font-size: .8em;
     font-style: oblique;
     opacity: .6;
 }
 
 .stack {
-    margin-top: -30%;
+    margin-top: -50%;
 }
 
 .conv {
-    font-size: 1.7em;
+    font-size: 1.2em;
 }
 
 .divg {
-    font-size: 1em;
+    font-size: .7em;
     opacity: .7;
 }
 
@@ -181,5 +182,5 @@ body {
 }
 
 input {
-    max-width: 4vh;
+    width: 4em;
 }

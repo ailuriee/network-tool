@@ -57,15 +57,19 @@ body {
 }
 
 .stack {
-    margin-top: -50%;
+    margin-top: -20%;
+}
+
+.substack {
+    margin-top: -40%;
 }
 
 .conv {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 .divg {
-    font-size: .7em;
+    font-size: 1em;
     opacity: .7;
 }
 

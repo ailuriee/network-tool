@@ -126,9 +126,9 @@ function populateDisplay(){
     document.querySelectorAll('.type').forEach((type)=> {
         type.innerHTML= '<p class="type-code">' + serializeType(networks[count]) + '</p>' + 
                         '<p class="stack"><span class="conv">' + networks[count].dom + '</span>' + 
-                        '<sub class="divg">' + networks[count].auth + '</sub>' +
-                        '<span class="conv">' + networks[count].aux + '</span>' +
-                        '<sub class="divg">' + networks[count].opp + '</sub></p>';
+                        '<span class="conv">' + networks[count].aux + '+</span></p>' +
+                        '<p class="substack"><sub class="divg">' + networks[count].auth + '</sub>' +
+                        '<sub class="divg">' + networks[count].opp + '-</sub></p>';
         count++;
     });
 }

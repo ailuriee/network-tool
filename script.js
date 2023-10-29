@@ -19,18 +19,18 @@ function TypeAttributes(IE, LC, NS, FT) {
 }
 
 function handleSubmit(type){
-    if (type.match(/^[IE][NS][FT][PJ]$/g)) {
+    if (type.match(/^[IE][NS][FT][PJ]$/g) || type.match(/^[IE][NS][FT]$/g) || type.match(/^[IE][FT][NS]$/g)) { //TODO: probably a better regex for this
         populateValues(type);
         populateDisplay();
     } else {
         //is this form validation?
-        console.log('Please enter a valid 4 letter type code.')
+        console.log('Please enter a valid 4 or 3 letter type code.')
     }
 }
 
 function populateValues(type) {
     networks = [];
-    baseAttributes = parseType(type);
+    baseAttributes = type.length === 3 ? parseCPTType(type) : parseType(type);
     let domNetwork = getDomNetwork(baseAttributes.IE, baseAttributes.LC, baseAttributes.NS, baseAttributes.FT);
     networks.push(...domNetwork);
     let tertNetwork = [];
@@ -58,6 +58,18 @@ function parseType(type) {
     return typeAttr;
 }
 
+function parseCPTType(type) {    
+    let typeAttr = new TypeAttributes();
+    let l1 = type.charAt(0);
+    let l2 = type.charAt(1);
+    let l3 = type.charAt(2);
+    typeAttr.IE = l1 == 'I' ? true : false;
+    typeAttr.LC = (l2 === 'N' || l2 === 'S') ? true : false;
+    typeAttr.NS = (l2 === 'N' || l3 === 'N') ? true : false;
+    typeAttr.FT = (l2 === 'F' || l3 === 'F') ? true : false;
+    return typeAttr;
+}
+
 //functons -> code
 function serializeType(type){
     let l1 = '';
@@ -77,6 +89,17 @@ function serializeType(type){
     }
 
     return l1+l2+l3+l4;
+}
+
+function serializeCPTType(type) {
+    let l1 = '';
+    let l2 = '';
+    let l3 = '';
+    l1 = type.dom.charAt(1) === 'e' ? 'e' : 'i';
+    l2 = type.dom.charAt(0);
+    l3 = type.aux.charAt(0);
+
+    return l1+l2+l3;
 }
 
 //hehe
@@ -124,7 +147,8 @@ function shiftAux(baseType) {
 function populateDisplay(){
     let count = 0;
     document.querySelectorAll('.type').forEach((type)=> {
-        type.innerHTML= '<p class="type-code">' + serializeType(networks[count]) + '</p>' + 
+        type.innerHTML= '<p class="type-code-3">' + serializeCPTType(networks[count]) + '</p>' + 
+                        '<p class="type-code-4">(' + serializeType(networks[count]) + ')</p>' + 
                         '<p class="stack"><span class="conv">' + networks[count].dom + '</span>' + 
                         '<span class="conv">' + networks[count].aux + '+</span></p>' +
                         '<p class="substack"><sub class="divg">' + networks[count].auth + '</sub>' +

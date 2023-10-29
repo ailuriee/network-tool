@@ -50,14 +50,21 @@ body {
     letter-spacing: 1px;
 }
 
-.type-code {
-    font-size: .8em;
+.type-code-3 {
+    font-size: .95em;
     font-style: oblique;
-    opacity: .6;
+    opacity: .8;
+}
+
+.type-code-4 {
+    margin-top: -40%;
+    font-size: .85em;
+    font-style: oblique;
+    opacity: .5;
 }
 
 .stack {
-    margin-top: -20%;
+    margin-top: -30%;
 }
 
 .substack {
@@ -65,7 +72,7 @@ body {
 }
 
 .conv {
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 .divg {

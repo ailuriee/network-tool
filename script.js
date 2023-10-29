@@ -1,9 +1,6 @@
 //hello you!!
 let baseAttributes = new TypeAttributes();
-let domNetwork = [];
-let auxNetwork = [];
-let tertNetwork = [];
-let infNetwork = [];
+let networks = [];
 
 let error = '';
 
@@ -32,12 +29,19 @@ function handleSubmit(type){
 }
 
 function populateValues(type) {
+    networks = [];
     baseAttributes = parseType(type);
-    let defaultType = getCogStack(baseAttributes.IE, baseAttributes.LC, baseAttributes.NS, baseAttributes.FT);
-    domNetwork = getDominantNetworks(baseAttributes.IE, baseAttributes.LC, baseAttributes.NS, baseAttributes.FT);
-    auxNetwork = getAuxiliaryNetworks(domNetwork[1]);
-    tertNetwork = getAuxiliaryNetworks(domNetwork[2]);
-    infNetwork = getInferiorNetworks(domNetwork[3]);
+    let domNetwork = getDomNetwork(baseAttributes.IE, baseAttributes.LC, baseAttributes.NS, baseAttributes.FT);
+    networks.push(...domNetwork);
+    let tertNetwork = [];
+    domNetwork.forEach((baseType)=> {
+        networks.push(shiftAuth(baseType));
+        tertNetwork.push(shiftAux(baseType));
+    });
+    networks.push(...tertNetwork);
+    tertNetwork.forEach((baseType)=> {
+        networks.push(shiftAuth(baseType));
+    })
 }
 
 //code -> attributes
@@ -80,7 +84,6 @@ function functionFunction(IE, LC, NS, FT) {
     return (LC ? (NS ? 'N' : 'S') : (FT ? 'F' : 'T')) + (IE ? 'i' : 'e');
 }
 
-//not working for INTJ / ENTP / ESFJ / ISFP
 function getCogStack(IE, LC, NS, FT) {
     const newStack = new CogStack();
     newStack.dom = functionFunction(IE, LC, NS, FT);
@@ -91,57 +94,41 @@ function getCogStack(IE, LC, NS, FT) {
     return newStack;
 }
 
-function getDominantNetworks(IE, LC, NS, FT) {
-    let networks = [];
-    networks.push(getCogStack(IE, LC, NS, FT)); //dom
-    networks.push(getCogStack(!IE, LC, NS, FT));
-    networks.push(getCogStack(IE, LC, !NS, !FT));
-    networks.push(getCogStack(!IE, LC, !NS, !FT));
+function getDomNetwork(IE, LC, NS, FT) {
+    let types = [];
+    types.push(getCogStack(IE, LC, NS, FT));
+    types.push(getCogStack(!IE, LC, NS, FT));
+    types.push(getCogStack(IE, LC, !NS, !FT));
+    types.push(getCogStack(!IE, LC, !NS, !FT));
 
-    return networks;
+    return types;
 }
 
-function getAuxiliaryNetworks(type) {
-    let typeAttr = (parseType(serializeType(type))); //why did I design it this way? what is wrong with me?
-    let networks = [];
-    let tempFT = typeAttr.FT;
-    let tempNS = typeAttr.NS;
-    typeAttr.LC ? tempFT = !typeAttr.FT : tempNS = !typeAttr.NS;
-    networks.push(getCogStack(!typeAttr.IE, !typeAttr.LC, tempNS, tempFT));
-    networks.push(getCogStack(!typeAttr.IE, !typeAttr.LC, !tempNS, !tempFT));
-    networks.push(getCogStack(typeAttr.IE, !typeAttr.LC, !tempNS, !tempFT)); 
-    networks.push(getCogStack(typeAttr.IE, !typeAttr.LC, tempNS, tempFT));
+function shiftAuth(baseType) {
+    let newDom = baseType.auth;
+    let newAuth = baseType.opp.charAt(0)+(baseType.opp.charAt(1) === 'e' ? 'i' : 'e');
+    let newAux = baseType.dom.charAt(0)+(baseType.dom.charAt(1) === 'e' ? 'i' : 'e');
+    let newOpp = baseType.aux;
 
-    return networks;
+    return new CogStack(newDom, newAuth, newAux, newOpp);
 }
 
-function getInferiorNetworks(type) {
-    let typeAttr = (parseType(serializeType(type)));
-    let networks = [];
-    let tempFT = typeAttr.FT;
-    let tempNS = typeAttr.NS;
-    typeAttr.LC ? tempNS = !typeAttr.NS : tempFT = !typeAttr.FT;
-    networks.push(getCogStack(typeAttr.IE, typeAttr.LC, !tempNS, tempFT));
-    networks.push(getCogStack(typeAttr.IE, typeAttr.LC, tempNS, !tempFT));
-    networks.push(getCogStack(!typeAttr.IE, typeAttr.LC, tempNS, !tempFT));
-    networks.push(getCogStack(!typeAttr.IE, typeAttr.LC, !tempNS, tempFT)); 
-
-    return networks;
+function shiftAux(baseType) {
+    let newDom = baseType.aux;
+    let newAuth = baseType.opp;
+    let newAux = baseType.dom;
+    let newOpp = baseType.auth;
+    return new CogStack(newDom, newAuth, newAux, newOpp);
 }
 
 function populateDisplay(){
     let count = 0;
-    let networkList = [];
-    networkList.push(...domNetwork);
-    networkList.push(...auxNetwork);
-    networkList.push(...tertNetwork);
-    networkList.push(...infNetwork);
     document.querySelectorAll('.type').forEach((type)=> {
-        type.innerHTML= '<p class="type-code">' + serializeType(networkList[count]) + '</p>' + 
-                        '<p class="stack"><span class="conv">' + networkList[count].dom + '</span>' + 
-                        '<sub class="divg">' + networkList[count].auth + '</sub>' +
-                        '<span class="conv">' + networkList[count].aux + '</span>' +
-                        '<sub class="divg">' + networkList[count].opp + '</sub></p>';
+        type.innerHTML= '<p class="type-code">' + serializeType(networks[count]) + '</p>' + 
+                        '<p class="stack"><span class="conv">' + networks[count].dom + '</span>' + 
+                        '<sub class="divg">' + networks[count].auth + '</sub>' +
+                        '<span class="conv">' + networks[count].aux + '</span>' +
+                        '<sub class="divg">' + networks[count].opp + '</sub></p>';
         count++;
     });
 }

@@ -45,12 +45,12 @@ function parseType(type) {
     let typeAttr = new TypeAttributes();
     let l1 = type.charAt(0);
     let l2 = type.charAt(1);
+    let l3 = type.charAt(2);
     let l4 = type.charAt(3);
     typeAttr.IE = l1 == 'I' ? true : false;
     typeAttr.LC = ((typeAttr.IE && l4 === 'J') || (!typeAttr.IE && l4 === 'P')) ? true : false;
     typeAttr.NS = ((typeAttr.LC && l2 === 'N') || (!typeAttr.LC && l2 === 'S')) ? true : false;
-    typeAttr.FT = ((!typeAttr.LC && l2 === 'F') || (typeAttr.LC && l2 === 'T')) ? true : false;
-
+    typeAttr.FT = ((typeAttr.LC && l3 === 'T') || (!typeAttr.LC && l3 === 'F')) ? true : false;
     return typeAttr;
 }
 
@@ -77,11 +77,16 @@ function serializeType(type){
 
 //hehe
 function functionFunction(IE, LC, NS, FT) {
+    console.log('functionFunction');
+    console.log(IE, LC, NS, FT);
+    console.log((LC ? (NS ? 'N' : 'S') : (FT ? 'F' : 'T')) + (IE ? 'i' : 'e'));
     return (LC ? (NS ? 'N' : 'S') : (FT ? 'F' : 'T')) + (IE ? 'i' : 'e');
 }
 
+//not working for INTJ / ENTP / ESFJ / ISFP
 function getCogStack(IE, LC, NS, FT) {
     const newStack = new CogStack();
+    console.log('f: ' + FT); //feeling typing not correct
     newStack.dom = functionFunction(IE, LC, NS, FT);
     newStack.auth = functionFunction(!IE, !LC, !NS, !FT);
     newStack.aux = functionFunction(IE, !LC, NS, FT);
@@ -101,8 +106,6 @@ function getDominantNetworks(IE, LC, NS, FT) {
 }
 
 function getAuxiliaryNetworks(type) {
-    console.log(serializeType(type));
-    console.log(type);
     let typeAttr = (parseType(serializeType(type))); //why did I design it this way? what is wrong with me?
     let networks = [];
     let tempFT = typeAttr.FT;

@@ -40,7 +40,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #1e2228;
+    background-color: rgba(18, 20, 24, 0.7);
     border: 1px solid #fff;
     gap: 10px;
 }

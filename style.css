@@ -1,5 +1,6 @@
 body {
-    transform: scale(80%);
+    scale: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -22,27 +23,26 @@ body {
 }
 
 .grid-container {
-    width: 100%;
+    max-width: 90%;
     height: 100%;
+    min-height: 50vw;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 5vh;
     text-align: center;
 }
 
 .type {
-    margin: auto;
+    margin: 15px;
     width: 15vh;
     height: 15vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    min-width: 120px;
+    min-height: 120px;
+    text-align: center;
     border-radius: 50%;
     background-color: rgba(18, 20, 24, 0.7);
     border: 1px solid #fff;
-    gap: 10px;
+    line-height: 30%;
 }
 
 .type>p {
@@ -51,24 +51,15 @@ body {
 }
 
 .type-code-3 {
-    font-size: .9em;
+    font-size: .8em;
     font-style: oblique;
     opacity: .8;
 }
 
 .type-code-4 {
-    margin-top: -35%;
-    font-size: .8em;
+    font-size: .7em;
     font-style: oblique;
     opacity: .5;
-}
-
-.stack {
-    margin-top: -25%;
-}
-
-.substack {
-    margin-top: -35%;
 }
 
 .conv {
@@ -76,7 +67,7 @@ body {
 }
 
 .divg {
-    font-size: 1.1em;
+    font-size: 1em;
     opacity: .7;
 }
 
@@ -162,23 +153,29 @@ body {
 }
 
 .type-form {
+    width: 100%;
+    transform: scale(120%);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    border-radius: 25%;
     grid-column: 5;
     grid-row: 3;
+    line-height: .5vh;
 }
 
 .network {
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 25%;
+    border-radius: 50%;
     border: 1px solid #fff;
 }
 
 .tert {
-    grid-column: 2 / 9;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    grid-column: 1 /10;
     grid-row: 1 / 6;
 }
 
@@ -193,5 +190,13 @@ body {
 }
 
 input {
+    text-align: center;
     width: 4em;
+}
+
+button {
+    font-size: medium;
+    border-radius: 25%;
+    color: #fff;
+    background-color: rgba(18, 20, 24, 0.7);
 }

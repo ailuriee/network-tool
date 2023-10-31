@@ -2,8 +2,6 @@
 let baseAttributes = new TypeAttributes();
 let networks = [];
 
-let error = '';
-
 function CogStack(dom, auth, aux, opp) {
     this.dom = dom;
     this.auth = auth;
@@ -147,12 +145,15 @@ function shiftAux(baseType) {
 function populateDisplay(){
     let count = 0;
     document.querySelectorAll('.type').forEach((type)=> {
-        type.innerHTML= '<p class="type-code-3">' + serializeCPTType(networks[count]) + '</p>' + 
+        type.setAttribute("id",serializeCPTType(networks[count]));
+        type.innerHTML= '<br>'+
+                        '<p class="type-code-3">' + serializeCPTType(networks[count]) + '</p>' + 
                         '<p class="type-code-4">(' + serializeType(networks[count]) + ')</p>' + 
+                        '<br>'+
                         '<p class="stack"><span class="conv">' + networks[count].dom + '</span>' + 
                         '<span class="conv">' + networks[count].aux + '+</span></p>' +
-                        '<p class="substack"><sub class="divg">' + networks[count].auth + '</sub>' +
-                        '<sub class="divg">' + networks[count].opp + '-</sub></p>';
+                        '<p class="substack"><span class="divg">' + networks[count].auth + '</span>' +
+                        '<span class="divg">' + networks[count].opp + '-</span></p>';
         count++;
     });
 }

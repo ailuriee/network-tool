@@ -152,8 +152,8 @@ function populateDisplay(){
                         '<br>'+
                         '<p class="stack"><span class="conv">' + networks[count].dom + '</span>' + 
                         '<span class="conv">' + networks[count].aux + '+</span></p>' +
-                        '<p class="substack"><span class="divg">' + networks[count].auth + '</span>' +
-                        '<span class="divg">' + networks[count].opp + '-</span></p>';
+                        '<p class="substack"><span class="divg">' + networks[count].opp + '</span>' +
+                        '<span class="divg">' + networks[count].auth + '-</span></p>';
         count++;
     });
 }

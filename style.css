@@ -200,3 +200,26 @@ button {
     color: #fff;
     background-color: rgba(18, 20, 24, 0.7);
 }
+
+#link-out > a {
+    color: #fff;
+    text-decoration: underline;
+    opacity: .8;
+  }
+  
+  #link-out > span {
+    color: #fff;
+    opacity: .6;
+  }
+
+
+#link-out {
+    width: 80%;
+    text-align: left;
+    z-index: 5;
+    position: absolute;
+    grid-column: 1 / 10;
+    top: -5%;
+    letter-spacing: 1px;
+    font-size: .75em;
+}

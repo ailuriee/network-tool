@@ -49,10 +49,10 @@ function parseType(type) {
     let l2 = type.charAt(1);
     let l3 = type.charAt(2);
     let l4 = type.charAt(3);
-    typeAttr.IE = l1 == 'I' ? true : false;
-    typeAttr.LC = ((typeAttr.IE && l4 === 'J') || (!typeAttr.IE && l4 === 'P')) ? true : false;
-    typeAttr.NS = ((typeAttr.LC && l2 === 'N') || (!typeAttr.LC && l2 === 'S')) ? true : false;
-    typeAttr.FT = ((typeAttr.LC && l3 === 'T') || (!typeAttr.LC && l3 === 'F')) ? true : false;
+    typeAttr.IE = l1 == 'I';
+    typeAttr.LC = ((typeAttr.IE && l4 === 'J') || (!typeAttr.IE && l4 === 'P'));
+    typeAttr.NS = ((typeAttr.LC && l2 === 'N') || (!typeAttr.LC && l2 === 'S'));
+    typeAttr.FT = ((typeAttr.LC && l3 === 'T') || (!typeAttr.LC && l3 === 'F'));
     return typeAttr;
 }
 
@@ -61,10 +61,10 @@ function parseCPTType(type) {
     let l1 = type.charAt(0);
     let l2 = type.charAt(1);
     let l3 = type.charAt(2);
-    typeAttr.IE = l1 == 'I' ? true : false;
-    typeAttr.LC = (l2 === 'N' || l2 === 'S') ? true : false;
-    typeAttr.NS = (l2 === 'N' || l3 === 'N') ? true : false;
-    typeAttr.FT = (l2 === 'F' || l3 === 'F') ? true : false;
+    typeAttr.IE = l1 == 'I';
+    typeAttr.LC = (l2 === 'N' || l2 === 'S');
+    typeAttr.NS = (l2 === 'N' || l3 === 'N');
+    typeAttr.FT = (l2 === 'F' || l3 === 'F');
     return typeAttr;
 }
 
